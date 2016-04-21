@@ -1,0 +1,16 @@
+{
+  "name": "Workout",
+  "version": "0.0.1",
+  "main": "webserver.js",
+  "dependencies": {
+    "express": "^4.13.4"
+  },
+  "author": "Joel B. Martins",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mart0747/workout.git"
+  },
+  "private": "true",
+  "devDependencies": {}
+}
+     
