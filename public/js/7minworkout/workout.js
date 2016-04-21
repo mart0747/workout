@@ -158,13 +158,34 @@ angular.module('7minWorkout').controller('WorkoutController', function ($scope, 
         return workout;
     }
 
+    var getNextExercise = function (currentExercisePlan) {
+        var nextExercise = null;
+        if (currentExercisePlan === restExercise) {
+            nextExercise = workoutPlan.exercises.shift();
+        } else { 
+            if (workoutPlan.exercises.length != 0) {
+                nextExercise = restExercise;       
+            }
+        }
+        
+        return nextExercise;
+    }
+    
     var startExercise = function (exercisePlan) {
         $scope.currentExercise = exercisePlan;
         $scope.currentExerciseDuration = 0;
         //interval calls the call back function, every X ms, Y # of times
         $interval(function () {
             ++$scope.currentExerciseDuration;
-        }, 1000, $scope.currentExercise.duration);
+        }, 100, $scope.currentExercise.duration)
+        .then(function() {
+            var next = getNextExercise(exercisePlan);
+            if (next) {
+                startExercise(next);
+            } else {
+                console.log("Workout Complete!");
+            }
+        });
     }
 
     var init = function () {
